@@ -1,0 +1,11 @@
+aiogram
+fastapi
+asyncpg
+uvicorn
+Jinja2
+requests
+pydantic_settings
+tzdata
+init_data_py
+werkzeug
+python-multipart

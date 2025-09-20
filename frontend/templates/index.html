@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Мои проекты</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../static/css/index.css" />
+    </head>
+    <body>
+        <div class="top-bar">
+            <i class="fas fa-bars" id="menuBtn"></i>
+            <span id="my-name-project">Мои проекты</span>
+            <i class="fas fa-bell" id="notifyBtn"></i>
+        </div>
+
+        <main>
+            <div class="content">
+                <!-- Экран: список проектов -->
+                <section id="projectsSection" class="app-section active">
+                    <div class="add-section-top">
+                        <button class="add-section-btn" id="openAddProjectBtn">
+                            <i class="fas fa-plus"></i> Добавить проект
+                        </button>
+                    </div>
+                    <div id="projectsList"></div>
+                </section>
+
+                <!-- Экран: конкретный проект -->
+                <section id="projectSection" class="app-section">
+                    <div class="add-section-top">
+                        <button class="add-section-btn" id="openAddSection">
+                            <i class="fas fa-plus"></i> Создать раздел
+                        </button>
+                    </div>
+                    <div id="sectionsContainer"></div>
+                </section>
+            </div>
+        </main>
+
+        <div class="bottom-bar">
+            <i class="fas fa-clock"></i>
+            <i class="fas fa-folder" id="folderBtn"></i>
+            <i class="fas fa-user"></i>
+        </div>
+
+        <!-- Модал уведомлений -->
+        <div class="modal" id="notifyModal">
+            <div class="modal-header">
+                <h3>Уведомления</h3>
+                <i class="fas fa-times" id="closeNotify"></i>
+            </div>
+            <p>Нет новых уведомлений.</p>
+        </div>
+
+        <!-- Модал меню проектов -->
+        <div class="modal" id="menuModal">
+            <div class="modal-header">
+                <h3>Выберите проект для настройки</h3>
+                <i class="fas fa-times" id="closeMenu"></i>
+            </div>
+
+            <!-- Сюда будем добавлять проекты -->
+            <div id="modalProjectsList"></div>
+        </div>
+
+        <!-- Модал добавления раздела -->
+        <div class="modal" id="sectionModal">
+            <div class="modal-header">
+                <h3>Новый раздел</h3>
+                <i class="fas fa-times" id="closeSectionModal"></i>
+            </div>
+            <input
+                type="text"
+                id="sectionNameInput"
+                placeholder="Введите название раздела"
+                autocomplete="off"
+            />
+            <button class="add-section-btn" id="addSectionBtn">
+                <i class="fas fa-plus"></i> Добавить
+            </button>
+        </div>
+
+        <!-- Модал добавления задачи -->
+        <div class="modal" id="taskModal">
+            <div class="modal-header">
+                <h3>Новая задача</h3>
+                <i class="fas fa-times" id="closeTaskModal"></i>
+            </div>
+            <input
+                type="text"
+                id="taskTitleInput"
+                placeholder="Название задачи"
+                autocomplete="off"
+            />
+            <textarea
+                id="taskDescInput"
+                placeholder="Описание задачи"
+                name="comment"
+                autocomplete="new-password"
+            ></textarea>
+            <select id="taskAssigneeInput" class="assignee-select">
+                <option value="">Кому назначить</option>
+                <option value="Иван Петров" data-avatar="👨‍💼">
+                    Иван Петров
+                </option>
+                <option value="Мария Сидорова" data-avatar="👩‍💻">
+                    Мария Сидорова
+                </option>
+                <option value="Алексей Иванов" data-avatar="👨‍🔧">
+                    Алексей Иванов
+                </option>
+                <option value="Екатерина Смирнова" data-avatar="👩‍🎨">
+                    Екатерина Смирнова
+                </option>
+            </select>
+            <select id="taskStatusInput" class="assignee-select">
+                <option value="" disabled selected hidden>
+                    Когда выполнить
+                </option>
+                <option value="Сегодня">Сегодня</option>
+                <option value="Завтра">Завтра</option>
+                <option value="Неделя">В течении недели</option>
+            </select>
+            <button class="add-section-btn" id="createTaskBtn">
+                <i class="fas fa-plus"></i> Создать задачу
+            </button>
+        </div>
+
+        <!-- Модал переименования раздела -->
+        <div class="modal" id="renameModal">
+            <div class="modal-header">
+                <h3>Переименовать раздел</h3>
+                <i class="fas fa-times" id="closeRenameModal"></i>
+            </div>
+            <input
+                type="text"
+                id="renameSectionInput"
+                placeholder="Введите новое имя раздела"
+                autocomplete="off"
+            />
+            <button class="add-section-btn" id="renameSectionBtn">
+                Сохранить
+            </button>
+        </div>
+
+        <!-- Модал подтверждения удаления -->
+        <div class="modal" id="deleteModal">
+            <div class="modal-header">
+                <h3>Удалить раздел</h3>
+                <i class="fas fa-times" id="closeDeleteModal"></i>
+            </div>
+            <p>Вы уверены, что хотите удалить этот раздел?</p>
+            <button class="add-section-btn" id="confirmDeleteBtn">
+                Подтвердить
+            </button>
+        </div>
+
+        <!-- Модал добавления проекта -->
+        <div class="modal" id="addProjectModal">
+            <div class="modal-header">
+                <h3>Новый проект</h3>
+                <i class="fas fa-times" id="closeAddProjectModal"></i>
+            </div>
+            <input
+                type="text"
+                id="projectNameInput"
+                placeholder="Название проекта"
+                autocomplete="off"
+            />
+            <button class="add-section-btn" id="addProjectBtn">
+                <i class="fas fa-plus"></i> Добавить
+            </button>
+        </div>
+
+        <!-- Модал редактирования задачи -->
+        <div class="modal" id="editTaskModal">
+            <div class="modal-header">
+                <h3>Редактировать задачу</h3>
+                <i class="fas fa-times" id="closeEditTaskModal"></i>
+            </div>
+
+            <button class="add-section-btn" id="closeTaskBtn">
+                <i class="fas fa-check"></i> Закрыть задачу
+            </button>
+
+            <input
+                type="text"
+                id="editTaskTitle"
+                placeholder="Название задачи"
+            />
+            <textarea
+                id="editTaskDesc"
+                placeholder="Описание задачи"
+            ></textarea>
+
+            <select id="editTaskAssignee" class="assignee-select">
+                <option value="">Кому назначить</option>
+                <option value="Иван Петров" data-avatar="👨‍💼">
+                    Иван Петров
+                </option>
+                <option value="Мария Сидорова" data-avatar="👩‍💻">
+                    Мария Сидорова
+                </option>
+                <option value="Алексей Иванов" data-avatar="👨‍🔧">
+                    Алексей Иванов
+                </option>
+                <option value="Екатерина Смирнова" data-avatar="👩‍🎨">
+                    Екатерина Смирнова
+                </option>
+            </select>
+
+            <select id="editTaskStatus" class="assignee-select">
+                <option value="Сегодня">Сегодня</option>
+                <option value="Завтра">Завтра</option>
+                <option value="Неделя">В течении недели</option>
+            </select>
+
+            <!-- Блок комментариев -->
+            <div id="commentsSection">
+                <h4>Комментарии</h4>
+                <div id="commentsList"></div>
+                <textarea
+                    id="newCommentInput"
+                    placeholder="Написать комментарий..."
+                ></textarea>
+                <button class="add-section-btn" id="addCommentBtn">
+                    <i class="fas fa-comment"></i> Добавить комментарий
+                </button>
+            </div>
+        </div>
+
+        <!-- Контекстное меню раздела -->
+        <div class="context-menu" id="sectionContextMenu">
+            <div class="context-item" data-action="task">Создать задачу</div>
+            <div class="context-item" data-action="rename">Переименовать</div>
+            <div class="context-item" data-action="delete">Удалить</div>
+        </div>
+
+        <script src="../static/js/app.js" defer></script>
+    </body>
+</html>
