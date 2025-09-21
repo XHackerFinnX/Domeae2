@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Редактирование проекта</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../static/css/project.css" />
+    </head>
+    <body>
+        <div class="top-bar">
+            <i class="fas fa-arrow-left" id="backBtn"></i>
+            <span id="pageTitle">Редактировать проект</span>
+        </div>
+
+        <main>
+            <div class="content">
+                <div class="editor">
+                    <!-- Название проекта -->
+                    <div class="card">
+                        <label for="projectNameInput">Название проекта</label>
+                        <input
+                            id="projectNameInput"
+                            class="project-name"
+                            type="text"
+                            value="Новый проект"
+                            autocomplete="off"
+                        />
+                    </div>
+
+                    <!-- Добавить пользователя -->
+                    <div class="card">
+                        <label for="userSearch"
+                            >Добавить пользователя в проект</label
+                        >
+                        <div class="row">
+                            <div class="search-wrapper">
+                                <input
+                                    id="userSearch"
+                                    class="user-search-input"
+                                    placeholder="Поиск по @username или имени..."
+                                    autocomplete="off"
+                                />
+                                <div
+                                    id="searchDropdown"
+                                    class="search-dropdown"
+                                    aria-hidden="true"
+                                ></div>
+                            </div>
+
+                            <button
+                                id="addByUsernameBtn"
+                                class="add-section-btn"
+                                title="Добавить (Enter)"
+                            >
+                                <i class="fas fa-user-plus"></i> Добавить
+                            </button>
+                        </div>
+
+                        <!-- Участники -->
+                        <div style="margin-top: 12px">
+                            <h4 style="margin: 0 0 8px 0">Участники</h4>
+                            <div
+                                id="participants"
+                                class="participants-list"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <!-- Права на проект -->
+                    <div class="card">
+                        <h4 style="margin: 0 0 8px 0">Права на проект</h4>
+                        <div id="rightsList" class="rights-list"></div>
+                    </div>
+
+                    <!-- Кнопки удаления проекта -->
+                    <div>
+                        <button
+                            id="deleteProjectBtn"
+                            class="add-section-delete-btn"
+                        >
+                            <i class="fas fa-trash"></i> Удалить проект
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Модал: подтвердить удаление участника -->
+        <div class="modal" id="confirmRemoveMemberModal">
+            <div class="modal-header">
+                <h3>Удалить участника</h3>
+                <i class="fas fa-times" id="closeRemoveMemberModal"></i>
+            </div>
+            <p id="removeMemberText">
+                Вы уверены, что хотите удалить участника?
+            </p>
+            <div class="confirm-actions">
+                <button class="add-section-btn" id="confirmRemoveMemberBtn">
+                    Подтвердить
+                </button>
+            </div>
+        </div>
+
+        <!-- Модал: подтвердить удаление проекта -->
+        <div class="modal" id="confirmDeleteProjectModal">
+            <div class="modal-header">
+                <h3>Удалить проект</h3>
+                <i class="fas fa-times" id="closeDeleteProjectModal"></i>
+            </div>
+            <p>
+                Вы уверены, что хотите удалить этот проект? Это действие нельзя
+                отменить.
+            </p>
+            <div class="confirm-actions">
+                <button
+                    class="add-section-btn"
+                    id="confirmDeleteProjectBtn"
+                    style="background: rgba(255, 80, 80, 0.18)"
+                >
+                    Подтвердить
+                </button>
+            </div>
+        </div>
+
+        <script src="../static/js/project.js" defer></script>
+    </body>
+</html>
