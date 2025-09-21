@@ -401,22 +401,12 @@ closeDeleteProjectModal.addEventListener("click", () =>
     closeModal(confirmDeleteProjectModal)
 );
 confirmDeleteProjectBtn.addEventListener("click", () => {
-    // Здесь можно добавить вызов API для удаления. После удаления — редирект.
-    // Для демо — сразу редиректим:
     window.location.href = "/";
 });
 
-// Кнопки навигации
-document.getElementById("homeBtn").addEventListener("click", () => {
-    window.location.href = "/";
-});
 document.getElementById("backBtn").addEventListener("click", () => {
-    window.history.back();
+    window.location.href = "/";
 });
-
-// Инициализация: можно добавить пару участников по умолчанию (опционально)
-// addMemberById(1);
-// addMemberById(2);
 
 // Начальная отрисовка
 renderParticipants();
@@ -425,5 +415,4 @@ renderRights();
 // Обработать изменение названия проекта (можно сохранить в бекенд при событии)
 projectNameInput.addEventListener("change", () => {
     flashNotice("Название проекта изменено");
-    // Здесь: отправить на сервер, если нужно
 });

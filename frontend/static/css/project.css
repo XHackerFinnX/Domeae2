@@ -36,8 +36,9 @@ body {
 }
 
 .top-bar {
+    position: relative; /* чтобы абсолютные элементы позиционировались внутри */
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* центрируем содержимое */
     align-items: center;
     padding: 20px 20px;
     background: rgba(30, 30, 30, 0.5);
@@ -47,6 +48,8 @@ body {
 }
 
 .top-bar i {
+    position: absolute;
+    left: 20px; /* отступ слева */
     font-size: 26px;
     cursor: pointer;
 }
