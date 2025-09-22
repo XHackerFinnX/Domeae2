@@ -250,3 +250,236 @@ main {
     cursor: pointer;
     font-size: 20px;
 }
+
+/* 📊 Мини-статистика */
+.profile-stats {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.stats-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+}
+
+.stat-item {
+    flex: 0 0 80%;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    border-radius: 12px;
+    scroll-snap-align: center;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+/* Кнопки под графиком */
+.chart-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.chart-buttons button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chart-buttons button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.interval-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.interval-buttons button {
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+}
+
+.interval-buttons button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.custom-interval {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.custom-interval input {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+    flex-direction: column;
+}
+
+.custom-interval button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+}
+
+.stats-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.stats-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Модальное окно календаря */
+.calendar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+}
+
+.calendar-modal.active {
+    display: flex;
+}
+
+.calendar-content {
+    background: rgba(44, 44, 44, 0.95); /* тёмно-серый фон */
+    border-radius: 16px;
+    padding: 16px;
+    width: 90%;
+    max-width: 400px;
+    height: 500px; /* фиксированная высота */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    animation: scaleIn 0.25s ease;
+    color: white;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.2s;
+}
+
+.calendar-header button:hover {
+    color: #4da6ff;
+}
+
+.calendar-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 3px; /* меньше расстояние */
+    margin-bottom: 12px;
+}
+
+.calendar-grid div {
+    text-align: center;
+    line-height: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    transition: background 0.2s, color 0.2s;
+}
+
+.calendar-grid div:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.calendar-grid div.today {
+    border: 2px solid #4da6ff;
+    font-weight: bold;
+}
+
+.calendar-grid div.selected {
+    background: #4da6ff;
+    color: white;
+}
+
+/* Дни, которые не принадлежат месяцу */
+.calendar-grid div.inactive {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.calendar-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.calendar-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: background 0.2s;
+}
+
+.calendar-actions button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
