@@ -23,6 +23,8 @@ const createTaskBtn = document.getElementById("createTaskBtn");
 const contextMenu = document.getElementById("sectionContextMenu");
 const projectName = document.getElementById("my-name-project");
 const folderBtn = document.querySelector(".bottom-bar .fa-folder");
+const userBtn = document.querySelector(".bottom-bar .fa-user");
+const clockBtn = document.querySelector(".bottom-bar .fa-clock");
 
 /* модалки переименования/удаления */
 const renameModal = document.getElementById("renameModal");
@@ -897,6 +899,16 @@ folderBtn &&
         closeAllModals();
         renderProjectsList();
         showSection(projectsSection);
+    });
+
+userBtn &&
+    userBtn.addEventListener("click", () => {
+        window.location.href = "/frontend/templates/profile.html";
+    });
+
+clockBtn &&
+    clockBtn.addEventListener("click", () => {
+        window.location.href = "/frontend/templates/clock.html";
     });
 
 function switchProject(name) {

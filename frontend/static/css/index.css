@@ -161,6 +161,7 @@ main {
     transform: translateY(0);
 }
 
+/* Нижняя панель */
 .bottom-bar {
     display: flex;
     justify-content: space-around;
@@ -179,6 +180,12 @@ main {
 .bottom-bar i {
     font-size: 28px;
     cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.bottom-bar i.active {
+    opacity: 1;
 }
 
 .modal {

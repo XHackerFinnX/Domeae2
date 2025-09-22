@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Профиль</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../static/css/no_blue.css" />
+        <link rel="stylesheet" href="../static/css/profile.css" />
+    </head>
+    <body>
+        <!-- Верхняя панель -->
+        <div class="top-bar">
+            <span>Профиль</span>
+            <i class="fas fa-bell" id="notifyBtn"></i>
+        </div>
+
+        <main>
+            <div class="content">
+                <!-- Аватар + имя -->
+                <section class="profile-header">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2 class="username">Иван Петров</h2>
+                </section>
+
+                <!-- Проекты -->
+                <section class="profile-projects card">
+                    <h3>Мои проекты</h3>
+                    <ul class="project-list">
+                        <li><i class="fas fa-folder"></i> Project Alpha</li>
+                        <li><i class="fas fa-folder"></i> Project Beta</li>
+                    </ul>
+                </section>
+
+                <!-- Участие -->
+                <section class="profile-projects card">
+                    <h3>Участвую в проектах</h3>
+                    <ul class="project-list">
+                        <li>
+                            <i class="fas fa-folder"></i> CRM System
+                            <i class="fas fa-lock-open access-icon"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-folder"></i> Design Hub
+                            <i class="fas fa-lock access-icon"></i>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Фильтры -->
+                <section class="filters card">
+                    <h3>Фильтры</h3>
+                    <ul class="filter-list">
+                        <li>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    class="filter-checkbox"
+                                    value="today"
+                                />
+                                <i class="fas fa-calendar-day"></i> Сегодня
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    class="filter-checkbox"
+                                    value="assigned"
+                                />
+                                <i class="fas fa-user-check"></i> Назначено мне
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    class="filter-checkbox"
+                                    value="important"
+                                />
+                                <i class="fas fa-star"></i> Важные
+                            </label>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+
+        <!-- Нижняя панель -->
+        <div class="bottom-bar">
+            <i class="fas fa-clock" id="clockBtn"></i>
+            <i class="fas fa-folder" id="folderBtn"></i>
+            <i class="fas fa-user active" id="userBtn"></i>
+        </div>
+
+        <!-- Модал уведомлений -->
+        <div class="modal" id="notifyModal">
+            <div class="modal-header">
+                <h3>Уведомления</h3>
+                <i class="fas fa-times" id="closeNotify"></i>
+            </div>
+            <p>Нет новых уведомлений.</p>
+        </div>
+
+        <script src="../static/js/profile.js" defer></script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>История задач</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../static/css/no_blue.css" />
+        <link rel="stylesheet" href="../static/css/clock.css" />
+    </head>
+    <body>
+        <!-- Верхняя панель -->
+        <div class="top-bar">
+            <span>История задач</span>
+            <i class="fas fa-bell" id="notifyBtn"></i>
+        </div>
+
+        <main></main>
+
+        <!-- Нижняя панель -->
+        <div class="bottom-bar">
+            <i class="fas fa-clock active" id="clockBtn"></i>
+            <i class="fas fa-folder" id="folderBtn"></i>
+            <i class="fas fa-user" id="userBtn"></i>
+        </div>
+
+        <!-- Модал уведомлений -->
+        <div class="modal" id="notifyModal">
+            <div class="modal-header">
+                <h3>Уведомления</h3>
+                <i class="fas fa-times" id="closeNotify"></i>
+            </div>
+            <p>Нет новых уведомлений.</p>
+        </div>
+
+        <script src="../static/js/clock.js" defer></script>
+    </body>
+</html>
