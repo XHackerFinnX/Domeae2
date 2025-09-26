@@ -18,7 +18,66 @@
             <i class="fas fa-bell" id="notifyBtn"></i>
         </div>
 
-        <main></main>
+        <main>
+            <!-- Выбор проекта -->
+            <div class="row">
+                <div class="search-wrapper">
+                    <label for="projectDropdown" style="font-weight: bold"
+                        >Выбрать проект:</label
+                    >
+                    <div id="projectDropdown" class="dropdown">
+                        <div class="dropdown-toggle">Выберите проект</div>
+                        <div class="search-dropdown" aria-hidden="true">
+                            <div class="search-item" data-value="project1">
+                                Проект 1
+                            </div>
+                            <div class="search-item" data-value="project2">
+                                Проект 2
+                            </div>
+                            <div class="search-item" data-value="project3">
+                                Проект 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фильтры -->
+            <div class="row">
+                <div class="search-wrapper">
+                    <label for="taskFilter" style="font-weight: bold"
+                        >Фильтры задач:</label
+                    >
+                    <div id="taskFilter" class="dropdown">
+                        <div class="dropdown-toggle">Выберите фильтры</div>
+                        <div class="search-dropdown" aria-hidden="true">
+                            <label class="search-item">
+                                <input type="checkbox" value="asc" /> Дата с
+                                начала
+                            </label>
+                            <label class="search-item">
+                                <input type="checkbox" value="desc" /> Дата с
+                                конца
+                            </label>
+                            <label class="search-item">
+                                <input type="checkbox" value="today" />
+                                Сегодня
+                            </label>
+                            <label class="search-item">
+                                <input type="checkbox" value="mine" /> Мои
+                                задачи
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция задач -->
+            <section id="tasksSection" class="card hidden">
+                <p class="list-task-text">Список задач</p>
+                <ul id="taskList" style="margin-bottom: 70px"></ul>
+            </section>
+        </main>
 
         <!-- Нижняя панель -->
         <div class="bottom-bar">

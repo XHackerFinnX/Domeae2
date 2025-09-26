@@ -161,6 +161,13 @@ main {
     transform: translateY(0);
 }
 
+.filter-active {
+    padding: 10px 14px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+
 /* Нижняя панель */
 .bottom-bar {
     display: flex;

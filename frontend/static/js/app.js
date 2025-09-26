@@ -66,6 +66,7 @@ let contextTarget = null;
 let currentSection = null;
 let projects = {};
 let currentProject = null;
+let selectedFilters = [];
 
 /* активная задача (при редактировании) */
 let activeTask = null;
@@ -131,25 +132,25 @@ function openModal(modal) {
 })();
 
 /* ===================== Утилиты для работы с LocalStorage ===================== */
-function saveToLocalStorage() {
-    const dataToSave = {
-        projects: projects,
-        currentProject: currentProject,
-    };
-    localStorage.setItem("taskManagerData", JSON.stringify(dataToSave));
-}
+// function saveToLocalStorage() {
+//     const dataToSave = {
+//         projects: projects,
+//         currentProject: currentProject,
+//     };
+//     localStorage.setItem("taskManagerData", JSON.stringify(dataToSave));
+// }
 
-function loadFromLocalStorage() {
-    const savedData = localStorage.getItem("taskManagerData");
-    console.log(savedData);
-    if (savedData) {
-        const parsedData = JSON.parse(savedData);
-        projects = parsedData.projects || {};
-        currentProject = parsedData.currentProject || null;
+// function loadFromLocalStorage() {
+//     const savedData = localStorage.getItem("taskManagerData");
+//     console.log(savedData);
+//     if (savedData) {
+//         const parsedData = JSON.parse(savedData);
+//         projects = parsedData.projects || {};
+//         currentProject = parsedData.currentProject || null;
 
-        renderProjectsList();
-    }
-}
+//         renderProjectsList();
+//     }
+// }
 
 /* ===================== Модификация функций для работы с комментариями ===================== */
 function createCommentElement(text, dateTime, isNew = true) {
@@ -194,7 +195,7 @@ function createCommentElement(text, dateTime, isNew = true) {
             if (commentIndex > -1) {
                 activeTask._comments.splice(commentIndex, 1);
                 comment.remove();
-                saveToLocalStorage();
+                // saveToLocalStorage();
             }
         }
     });
@@ -236,7 +237,7 @@ addSectionBtn &&
         addSection(name);
         sectionNameInput.value = "";
         sectionModal.classList.remove("active");
-        saveToLocalStorage();
+        // saveToLocalStorage();
     });
 
 /* создание задачи */
@@ -278,7 +279,7 @@ createTaskBtn &&
         if (statusSelect) statusSelect.value = "Сегодня";
 
         taskModal.classList.remove("active");
-        saveToLocalStorage();
+        // saveToLocalStorage();
     });
 
 /* контекстное меню */
@@ -322,7 +323,7 @@ renameSectionBtn &&
         }
         renameModal.classList.remove("active");
         renameSectionInput.value = "";
-        saveToLocalStorage();
+        // saveToLocalStorage();
     });
 
 /* Удаление */
@@ -337,7 +338,7 @@ confirmDeleteBtn &&
             setTimeout(() => sectionToDelete.remove(), 400);
         }
         deleteModal.classList.remove("active");
-        saveToLocalStorage();
+        // saveToLocalStorage();
     });
 
 // открыть окно добавления проекта
@@ -364,7 +365,7 @@ addProjectBtn &&
         // Убрать старый код добавления проекта в список
         // и оставить только вызов switchProject
         switchProject(name);
-        saveToLocalStorage();
+        // saveToLocalStorage();
     });
 
 /* ===================== добавление разделов / задач ===================== */
@@ -671,7 +672,7 @@ function setupPressDrag(task) {
         document.body.style.overflow = "";
         isDragging = false;
         currentTarget = null;
-        saveToLocalStorage();
+        // saveToLocalStorage();
     }
 
     task.addEventListener("mousedown", startPress);
@@ -685,6 +686,19 @@ function setupPressDrag(task) {
         }
     });
     mo.observe(document.body, { childList: true, subtree: true });
+}
+
+// Обновление отображения активных фильтров
+function renderActiveFilters() {
+    const container = document.querySelector(".filter-active");
+    if (!container) return;
+
+    if (selectedFilters.length === 0) {
+        container.textContent = "Фильтры: Нет";
+    } else {
+        const activeList = selectedFilters.join(", ");
+        container.textContent = `Фильтры: ${activeList}`;
+    }
 }
 
 /* ===================== утилиты ===================== */
@@ -965,7 +979,7 @@ function switchProject(name) {
     menuModal.classList.remove("active");
 
     document.querySelector(".content").scrollTo(0, 0);
-    saveToLocalStorage();
+    // saveToLocalStorage();
 }
 
 /* ===================== редактирование задачи (открытие, сохранение, комментарии) ===================== */
@@ -1094,7 +1108,7 @@ function saveTaskChanges() {
     activeTask._comments = prevComments;
     // снова навесим drag/press
     setupPressDrag(activeTask);
-    saveToLocalStorage();
+    // saveToLocalStorage();
 }
 
 // подписываем поля на авто-сохранение (если они есть)
@@ -1138,7 +1152,7 @@ document.addEventListener("click", (e) => {
     });
 
     if (newCommentInput) newCommentInput.value = "";
-    saveToLocalStorage();
+    // saveToLocalStorage();
 });
 
 // Закрытие задачи (делегированный обработчик) — работает даже если кнопка появилась позже
@@ -1159,19 +1173,19 @@ document.addEventListener("click", (e) => {
     editTaskModal = document.getElementById("editTaskModal") || editTaskModal;
     if (editTaskModal) editTaskModal.classList.remove("active");
     activeTask = null;
-    saveToLocalStorage();
+    // saveToLocalStorage();
 });
 
 /* ===================== инициализация кастомных селектов ===================== */
 document.addEventListener("DOMContentLoaded", function () {
     // Загружаем данные из localStorage
-    loadFromLocalStorage();
+    // loadFromLocalStorage();
 
     // Если нет данных в localStorage, отображаем список проектов
     if (Object.keys(projects).length === 0) {
         renderProjectsList();
     }
-
+    renderActiveFilters();
     enhanceCustomSelects();
 
     // если редактирование было добавлено динамически в HTML и нужны элементы — обновляем ссылки и подписки

@@ -35,31 +35,31 @@ function updateFilterCounter() {
 }
 
 // Сохранение фильтров
-function saveFilters() {
-    localStorage.setItem(
-        FILTERS_KEY,
-        JSON.stringify(Array.from(selectedFilters))
-    );
-}
+// function saveFilters() {
+//     localStorage.setItem(
+//         FILTERS_KEY,
+//         JSON.stringify(Array.from(selectedFilters))
+//     );
+// }
 
-// Загрузка фильтров
-function loadFilters() {
-    const saved = localStorage.getItem(FILTERS_KEY);
-    if (saved) {
-        try {
-            selectedFilters = new Set(JSON.parse(saved));
-        } catch {
-            selectedFilters = new Set();
-        }
-    }
+// // Загрузка фильтров
+// function loadFilters() {
+//     const saved = localStorage.getItem(FILTERS_KEY);
+//     if (saved) {
+//         try {
+//             selectedFilters = new Set(JSON.parse(saved));
+//         } catch {
+//             selectedFilters = new Set();
+//         }
+//     }
 
-    // Восстановление состояния чекбоксов
-    document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {
-        checkbox.checked = selectedFilters.has(checkbox.value);
-    });
+//     // Восстановление состояния чекбоксов
+//     document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {
+//         checkbox.checked = selectedFilters.has(checkbox.value);
+//     });
 
-    updateFilterCounter();
-}
+//     updateFilterCounter();
+// }
 
 /* обработка клика по иконке */
 folderBtn &&
@@ -84,7 +84,7 @@ document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {
         } else {
             selectedFilters.delete(checkbox.value);
         }
-        saveFilters();
+        // saveFilters();
         updateFilterCounter();
         console.log("Активные фильтры:", Array.from(selectedFilters));
         // Здесь можно вызывать функцию для применения фильтрации
@@ -93,7 +93,7 @@ document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Загрузка сохранённых фильтров
-    loadFilters();
+    // loadFilters();
 });
 
 // === Модалка статистики ===
