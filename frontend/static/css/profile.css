@@ -380,13 +380,15 @@ main {
     border-radius: 16px;
     padding: 16px;
     width: 90%;
-    max-width: 400px;
-    height: 500px; /* фиксированная высота */
+    max-width: 360px;
+    min-width: 320px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     animation: scaleIn 0.25s ease;
     color: white;
+    box-sizing: border-box;
+    overflow: hidden; /* предотвращает переполнение */
 }
 
 @keyframes scaleIn {
@@ -423,23 +425,27 @@ main {
 }
 
 .calendar-grid {
-    flex: 1;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 3px; /* меньше расстояние */
     margin-bottom: 12px;
+    flex-grow: 1; /* растягивает календарь по высоте */
 }
 
 .calendar-grid div {
     text-align: center;
-    line-height: 36px;
-    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
     color: white;
     transition: background 0.2s, color 0.2s;
+    padding: 8px;
+    aspect-ratio: 1; /* делает ячейки квадратными */
+    /* background-color: rgba(255, 255, 255, 0.1); */
 }
 
 .calendar-grid div:hover {
@@ -462,10 +468,26 @@ main {
     cursor: default;
 }
 
+/* Заголовок для дней недели */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.calendar-weekdays span {
+    padding: 6px;
+}
+
+/* Действия (кнопки) */
 .calendar-actions {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+    margin-top: auto; /* прижимаем кнопки к низу */
 }
 
 .calendar-actions button {
