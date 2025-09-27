@@ -9,6 +9,9 @@ const allModals = [notifyModal].filter(Boolean);
 
 const tasksSection = document.getElementById("tasksSection");
 const taskList = document.getElementById("taskList");
+const closeFilters = document.getElementById("closeFilters");
+const openFilters = document.getElementById("openFilters");
+const taskFilter = document.getElementById("taskFilter");
 
 let currentTasks = [];
 
@@ -156,3 +159,25 @@ clockBtn &&
     clockBtn.addEventListener("click", () => {
         window.location.href = "/frontend/templates/clock.html";
     });
+
+openFilters.style.display = "none";
+
+// Скрытие фильтра и переключение иконок
+closeFilters.addEventListener("click", () => {
+    taskFilter.classList.add("hidden"); // Скрываем фильтры
+    openFilters.style.display = "inline-block"; // Показываем стрелку вниз
+    closeFilters.style.display = "none"; // Скрываем крестик
+
+    // Поднимаем контент
+    tasksSection.style.marginTop = "15px";
+});
+
+// Показ фильтра и переключение иконок
+openFilters.addEventListener("click", () => {
+    taskFilter.classList.remove("hidden"); // Показываем фильтры
+    closeFilters.style.display = "inline-block"; // Показываем крестик
+    openFilters.style.display = "none"; // Скрываем стрелку вниз
+
+    // Опускаем контент
+    tasksSection.style.marginTop = "15px";
+});

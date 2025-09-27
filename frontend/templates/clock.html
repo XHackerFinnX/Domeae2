@@ -45,9 +45,27 @@
             <!-- Фильтры -->
             <div class="row">
                 <div class="search-wrapper">
-                    <label for="taskFilter" style="font-weight: bold"
-                        >Фильтры задач:</label
-                    >
+                    <div style="display: flex; justify-content: space-between">
+                        <label for="taskFilter" style="font-weight: bold">
+                            Фильтры задач:
+                        </label>
+                        <div class="filter-controls">
+                            <i
+                                class="fas fa-times"
+                                id="closeFilters"
+                                style="cursor: pointer; font-size: 18px"
+                            ></i>
+                            <i
+                                class="fas fa-chevron-down"
+                                id="openFilters"
+                                style="
+                                    cursor: pointer;
+                                    font-size: 18px;
+                                    display: none;
+                                "
+                            ></i>
+                        </div>
+                    </div>
                     <div id="taskFilter" class="dropdown">
                         <div class="dropdown-toggle">Выберите фильтры</div>
                         <div class="search-dropdown" aria-hidden="true">
@@ -60,8 +78,7 @@
                                 конца
                             </label>
                             <label class="search-item">
-                                <input type="checkbox" value="today" />
-                                Сегодня
+                                <input type="checkbox" value="today" /> Сегодня
                             </label>
                             <label class="search-item">
                                 <input type="checkbox" value="mine" /> Мои
