@@ -68,7 +68,7 @@ main {
 .content {
     flex: 1;
     overflow-y: auto;
-    padding: 0 15px 80px;
+    padding: 0 10px 80px;
 }
 
 .content::-webkit-scrollbar {
@@ -330,6 +330,7 @@ main {
     border-radius: 8px;
     color: white;
     flex-direction: column;
+    width: 93%;
 }
 
 .custom-interval button {
@@ -339,6 +340,7 @@ main {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     cursor: pointer;
+    width: 100%;
 }
 
 .stats-btn {

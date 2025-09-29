@@ -69,7 +69,7 @@ main {
 .content {
     flex: 1;
     overflow-y: auto;
-    padding: 0 15px 80px;
+    padding-bottom: 80px;
 }
 
 .content::-webkit-scrollbar {

@@ -63,7 +63,7 @@ main {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    padding: 0 15px; /* боковые отступы для всего контента */
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
