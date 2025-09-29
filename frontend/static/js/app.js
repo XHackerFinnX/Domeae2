@@ -51,6 +51,7 @@ let editTaskTitle = document.getElementById("editTaskTitle");
 let editTaskDesc = document.getElementById("editTaskDesc");
 let editTaskAssignee = document.getElementById("editTaskAssignee");
 let editTaskStatus = document.getElementById("editTaskStatus");
+let editTaskImportant = document.getElementById("editTaskImportant");
 let commentsList = document.getElementById("commentsList");
 let newCommentInput = document.getElementById("newCommentInput");
 let addCommentBtn = document.getElementById("addCommentBtn");
@@ -95,7 +96,7 @@ function openModal(modal) {
 /* ===================== динамические стили (вставляем в head) ===================== */
 (function injectStyles() {
     const css = `
-  .ghost {
+    .ghost {
     position: fixed;
     z-index: 9999;
     pointer-events: none;
@@ -105,27 +106,68 @@ function openModal(modal) {
     transition: left 180ms ease, top 180ms ease, transform 120ms ease, opacity 200ms ease;
     will-change: left, top, transform;
     background: inherit;
-  }
-  .tasks {
+    }
+    .tasks {
     min-height: 0;
     transition: min-height 0.2s ease;
     min-height: 60px;
-  }
-  .tasks.highlight {
+    }
+    .tasks.highlight {
     box-shadow: inset 0 0 0 2px rgba(255,255,255,0.06);
     border-radius: 8px;
-  }
-  .tasks.expand {
+    }
+    .tasks.expand {
     min-height: 60px;
-  }
-  .moved-outline {
+    }
+    .moved-outline {
     animation: movedOutline 900ms ease forwards;
-  }
-  @keyframes movedOutline {
+    }
+    @keyframes movedOutline {
     0% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
     40% { box-shadow: 0 0 0 6px rgba(255,255,255,0.18); }
     100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-  }`;
+    }
+    .important-flag {
+        color: orange;
+        font-size: 16px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 42px;
+        height: 22px;
+    }
+    .switch input {
+        display: none;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 22px;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+    input:checked + .slider {
+        background-color: orange;
+    }
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }`;
     const s = document.createElement("style");
     s.textContent = css;
     document.head.appendChild(s);
@@ -252,7 +294,8 @@ createTaskBtn &&
         const assigneeSelect = document.getElementById("taskAssigneeInput");
         const assignee = assigneeSelect ? assigneeSelect.value : "";
         const status = document.getElementById("taskStatusInput").value;
-
+        const importantCheckbox = document.getElementById("taskImportant");
+        const important = importantCheckbox ? importantCheckbox.checked : false;
         if (!title) return;
 
         // Получаем аватарку выбранного пользователя
@@ -268,7 +311,8 @@ createTaskBtn &&
             desc,
             assignee,
             status,
-            avatar, // Добавляем аватарку в данные задачи
+            avatar,
+            important,
         });
 
         // Очищаем форму
@@ -277,6 +321,7 @@ createTaskBtn &&
         if (assigneeSelect) assigneeSelect.value = "";
         const statusSelect = document.getElementById("taskStatusInput");
         if (statusSelect) statusSelect.value = "Сегодня";
+        if (importantCheckbox) importantCheckbox.checked = false;
 
         taskModal.classList.remove("active");
         // saveToLocalStorage();
@@ -402,12 +447,10 @@ function addSection(name) {
 
 function addTask(
     container,
-    { title, desc, assignee, status, avatar, comments = [] }
+    { title, desc, assignee, status, avatar, important, comments = [] }
 ) {
-    if (!container) {
-        console.warn("addTask: target container is null");
-        return;
-    }
+    if (!container) return;
+
     const task = document.createElement("div");
     task.classList.add("task");
 
@@ -416,20 +459,9 @@ function addTask(
     task.dataset.desc = desc || "";
     task.dataset.assignee = assignee || "";
     task.dataset.status = status || "";
+    task.dataset.important = important ? "1" : "0";
 
-    // инициализируем комментарии
-    task._comments = comments.map((commentData) => {
-        const commentElement = createCommentElement(
-            commentData.text,
-            commentData.dateTime,
-            false
-        );
-        return {
-            text: commentData.text,
-            dateTime: commentData.dateTime,
-            element: commentElement.element,
-        };
-    });
+    task._comments = comments;
 
     task.innerHTML = `
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -437,6 +469,7 @@ function addTask(
                 avatar || "👤"
             }</span>
             <strong>${escapeHtml(title)}</strong>
+            ${important ? '<i class="fas fa-flag important-flag"></i>' : ""}
         </div>
         <small>${escapeHtml(desc)}</small><br>
         <em>${escapeHtml(assignee)}</em> — <span>${escapeHtml(status)}</span>
@@ -661,7 +694,6 @@ function setupPressDrag(task) {
             const sectionName =
                 currentTarget.closest(".section")?.querySelector("h3")
                     ?.innerText || "[без раздела]";
-            console.log(`Task "${tTitle}" moved to section "${sectionName}"`);
         } else {
             originalParent.appendChild(task);
             task.style.visibility = "";
@@ -1023,6 +1055,10 @@ sectionsContainer.addEventListener("click", (e) => {
         editTaskStatus.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
+    if (editTaskImportant) {
+        editTaskImportant.checked = task.dataset.important === "1";
+    }
+
     // рендерим комментарии
     if (commentsList) {
         commentsList.innerHTML = "";
@@ -1075,10 +1111,13 @@ function saveTaskChanges() {
         activeTask.dataset.status ||
         "";
 
+    const important = editTaskImportant ? editTaskImportant.checked : false;
+
     activeTask.dataset.title = title;
     activeTask.dataset.desc = desc;
     activeTask.dataset.assignee = assignee;
     activeTask.dataset.status = status;
+    activeTask.dataset.important = important ? "1" : "0";
 
     // получаем аватар из выбранного assignee (если есть)
     let avatar = "👤";
@@ -1099,6 +1138,7 @@ function saveTaskChanges() {
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
             <span class="avatar-circle" style="width: 24px; height: 24px; font-size: 14px;">${avatar}</span>
             <strong>${escapeHtml(title)}</strong>
+            ${important ? '<i class="fas fa-flag important-flag"></i>' : ""}
         </div>
         <small>${escapeHtml(desc)}</small><br>
         <em>${escapeHtml(assignee)}</em> — <span>${escapeHtml(status)}</span>
@@ -1120,6 +1160,8 @@ if (editTaskTitle || editTaskDesc || editTaskAssignee || editTaskStatus) {
         editTaskAssignee.addEventListener("change", saveTaskChanges);
     editTaskStatus &&
         editTaskStatus.addEventListener("change", saveTaskChanges);
+    editTaskImportant &&
+        editTaskImportant.addEventListener("change", saveTaskChanges);
 }
 
 // Добавление комментария (делегировано, чтобы работало даже если кнопка добавлена динамически)

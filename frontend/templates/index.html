@@ -104,6 +104,7 @@
                 name="comment"
                 autocomplete="new-password"
             ></textarea>
+
             <select id="taskAssigneeInput" class="assignee-select">
                 <option value="">Кому назначить</option>
                 <option value="Иван Петров" data-avatar="👨‍💼">
@@ -127,6 +128,22 @@
                 <option value="Завтра">Завтра</option>
                 <option value="Неделя">В течении недели</option>
             </select>
+
+            <label
+                style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin: 8px 0;
+                "
+            >
+                <label class="switch">
+                    <input type="checkbox" id="taskImportant" />
+                    <span class="slider"></span>
+                </label>
+                <span>Важная задача</span>
+            </label>
+
             <button class="add-section-btn" id="createTaskBtn">
                 <i class="fas fa-plus"></i> Создать задачу
             </button>
@@ -220,6 +237,21 @@
                 <option value="Завтра">Завтра</option>
                 <option value="Неделя">В течении недели</option>
             </select>
+
+            <label
+                style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin: 8px 0;
+                "
+            >
+                <label class="switch">
+                    <input type="checkbox" id="editTaskImportant" />
+                    <span class="slider"></span>
+                </label>
+                <span>Важная задача</span>
+            </label>
 
             <!-- Блок комментариев -->
             <div id="commentsSection">
