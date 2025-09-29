@@ -236,7 +236,7 @@ main {
 .modal textarea,
 .modal select,
 .modal button {
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 10px auto;
     display: block;
     border-radius: 8px;
@@ -284,7 +284,6 @@ main {
 }
 
 .project-item {
-    width: calc(100% - 30px);
     height: 48px;
     margin-top: 0px;
     margin-bottom: 10px;
@@ -403,7 +402,7 @@ main {
 /* Альтернатива: кастомный выпадающий список с прокруткой */
 .custom-select-wrapper {
     position: relative;
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 10px auto;
 }
 
@@ -486,8 +485,6 @@ main {
 }
 
 .comment {
-    width: calc(100% - 40px);
-    margin-left: 10px;
     padding: 10px;
     margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.05);

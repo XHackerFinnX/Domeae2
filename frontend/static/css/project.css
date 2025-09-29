@@ -197,7 +197,6 @@ main {
 
 .editor {
     max-width: 900px;
-    margin: 20px auto;
     padding: 12px;
 }
 
@@ -236,7 +235,6 @@ input[type="text"].project-name {
 .search-wrapper {
     position: relative;
     width: 100%;
-    max-width: 520px;
 }
 .user-search-input {
     width: 100%;
