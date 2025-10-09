@@ -1,6 +1,6 @@
 @font-face {
     font-family: "ProximaNova";
-    src: url("fonts/proximanova_bold.otf") format("opentype");
+    src: url("../fonts/proximanova_bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
@@ -101,7 +101,7 @@ main {
     bottom: -100%;
     background: #2c2c2c;
     border-radius: 20px 20px 0 0;
-    padding: 20px;
+    /* padding: 20px; */
     transition: bottom 0.3s ease;
     max-height: 70%;
     overflow-y: auto;
@@ -119,6 +119,9 @@ main {
     align-items: center;
     margin-bottom: 10px;
     gap: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .modal-header h3 {
@@ -291,7 +294,39 @@ main {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.dropdown .search-item input[type="checkbox"] {
-    accent-color: white;
+.search-item input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    background: transparent;
     cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.dropdown .search-item input[type="checkbox"] {
+    accent-color: #4caf50;
+    cursor: pointer;
+}
+
+.search-item input[type="checkbox"]:checked {
+    background: #4caf50;
+    border-color: #4caf50;
+}
+
+.search-item input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 14px;
+    color: white;
+}
+
+.search-item input[type="checkbox"]:focus-visible {
+    outline: 2px solid #4caf50;
+    outline-offset: 2px;
 }

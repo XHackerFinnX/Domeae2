@@ -29,7 +29,7 @@
                             id="projectNameInput"
                             class="project-name"
                             type="text"
-                            value="Новый проект"
+                            value="{{ project_name }}"
                             autocomplete="off"
                         />
                     </div>
@@ -114,7 +114,13 @@
                 <h3>Удалить проект</h3>
                 <i class="fas fa-times" id="closeDeleteProjectModal"></i>
             </div>
-            <p>
+            <p
+                style="
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    margin-bottom: 5px;
+                "
+            >
                 Вы уверены, что хотите удалить этот проект? Это действие нельзя
                 отменить.
             </p>

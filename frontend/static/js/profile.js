@@ -64,17 +64,17 @@ function updateFilterCounter() {
 /* обработка клика по иконке */
 folderBtn &&
     folderBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/index.html";
+        window.location.href = "/";
     });
 
 userBtn &&
     userBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/profile.html";
+        window.location.href = "/profile";
     });
 
 clockBtn &&
     clockBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/clock.html";
+        window.location.href = "/clock";
     });
 
 document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {

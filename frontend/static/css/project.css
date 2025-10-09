@@ -1,6 +1,6 @@
 @font-face {
     font-family: "ProximaNova";
-    src: url("fonts/proximanova_bold.otf") format("opentype");
+    src: url("../fonts/proximanova_bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
@@ -69,7 +69,6 @@ main {
 .content {
     flex: 1;
     overflow-y: auto;
-    padding-bottom: 80px;
 }
 
 .content::-webkit-scrollbar {
@@ -146,7 +145,6 @@ main {
     bottom: -100%;
     background: #2c2c2c;
     border-radius: 20px 20px 0 0;
-    padding: 20px;
     transition: bottom 0.3s ease;
     max-height: 70%;
     overflow-y: auto;
@@ -164,6 +162,9 @@ main {
     align-items: center;
     margin-bottom: 10px;
     gap: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .modal-header h3 {
@@ -337,5 +338,4 @@ input[type="text"].project-name {
 .confirm-actions {
     display: flex;
     gap: 10px;
-    margin-top: 12px;
 }

@@ -71,6 +71,8 @@ function initDropdown(id, multiple = false) {
                     menu.querySelectorAll("input:checked")
                 ).map((c) => c.value);
 
+                console.log(selectedFilters);
+
                 toggle.textContent = selectedFilters.length
                     ? "Фильтры: " + selectedFilters.join(", ")
                     : "Выберите фильтры";
@@ -106,16 +108,16 @@ function applyFilters(filters) {
     let filtered = [...currentTasks];
     const today = new Date().toISOString().split("T")[0];
 
-    if (filters.includes("asc")) {
+    if (filters.includes("Дата с начала")) {
         filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
-    if (filters.includes("desc")) {
+    if (filters.includes("Дата с конца")) {
         filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
-    if (filters.includes("today")) {
+    if (filters.includes("Сегодня")) {
         filtered = filtered.filter((t) => t.date === today);
     }
-    if (filters.includes("mine")) {
+    if (filters.includes("Мои задачи")) {
         filtered = filtered.filter((t) => t.mine);
     }
 
@@ -149,15 +151,15 @@ function openModal(modal) {
 // ================= NAV =================
 folderBtn &&
     folderBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/index.html";
+        window.location.href = "/";
     });
 userBtn &&
     userBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/profile.html";
+        window.location.href = "/profile";
     });
 clockBtn &&
     clockBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/clock.html";
+        window.location.href = "/clock";
     });
 
 openFilters.style.display = "none";

@@ -126,7 +126,9 @@
                 <h3>Уведомления</h3>
                 <i class="fas fa-times" id="closeNotify"></i>
             </div>
-            <p>Нет новых уведомлений.</p>
+            <p style="padding-left: 20px; padding-right: 20px">
+                Нет новых уведомлений.
+            </p>
         </div>
 
         <!-- Модалка статистики -->
@@ -136,15 +138,25 @@
                 <i class="fas fa-times" id="closeStats"></i>
             </div>
             <div class="modal-body">
-                <div class="project-stats">
+                <div
+                    class="project-stats"
+                    style="padding-left: 20px; padding-right: 20px"
+                >
                     <p>Project Alpha — 5 задач</p>
                     <p>Project Beta — 3 задачи</p>
                     <p>CRM System — 4 задачи</p>
                 </div>
 
-                <canvas id="statsChart" height="180"></canvas>
+                <canvas
+                    id="statsChart"
+                    height="180"
+                    style="padding-left: 5px"
+                ></canvas>
 
-                <div class="interval-buttons">
+                <div
+                    class="interval-buttons"
+                    style="padding-left: 10px; padding-right: 10px"
+                >
                     <button data-interval="12h">12ч</button>
                     <button data-interval="3d">3 дня</button>
                     <button data-interval="1w">Неделя</button>
@@ -152,7 +164,10 @@
                     <button data-interval="1m">Месяц</button>
                 </div>
 
-                <div class="custom-interval">
+                <div
+                    class="custom-interval"
+                    style="padding-left: 10px; padding-right: 10px"
+                >
                     <div style="display: flex; gap: 10px">
                         <div>
                             <label onclick="openCalendar('dateFrom')"
@@ -176,7 +191,7 @@
                             </label>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-bottom: 10px">
                         <button id="applyInterval">Применить</button>
                     </div>
                 </div>

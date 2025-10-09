@@ -1,6 +1,6 @@
 @font-face {
     font-family: "ProximaNova";
-    src: url("fonts/proximanova_bold.otf") format("opentype");
+    src: url("../fonts/proximanova_bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
@@ -43,6 +43,7 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 10;
+    gap: 20px;
 }
 
 .top-bar i {
@@ -53,6 +54,12 @@ body {
 .top-bar span {
     font-size: 20px;
     font-weight: bold;
+}
+
+#my-name-project {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 main {
@@ -202,7 +209,7 @@ main {
     bottom: -100%;
     background: #2c2c2c;
     border-radius: 20px 20px 0 0;
-    padding: 20px;
+    /* padding: 20px; */
     transition: bottom 0.3s ease;
     max-height: 70%;
     overflow-y: auto;
@@ -220,6 +227,9 @@ main {
     align-items: center;
     margin-bottom: 10px;
     gap: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .modal-header h3 {
@@ -236,7 +246,7 @@ main {
 .modal textarea,
 .modal select,
 .modal button {
-    width: 100%;
+    width: 95%;
     margin: 10px auto;
     display: block;
     border-radius: 8px;
@@ -284,7 +294,7 @@ main {
 }
 
 .project-item {
-    height: 48px;
+    min-height: 48px;
     margin-top: 0px;
     margin-bottom: 10px;
     margin-left: auto;
@@ -343,14 +353,19 @@ main {
 .project-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .project-name {
     font-weight: bold;
     font-size: 16px;
     flex: 1;
+    line-height: 1.4;
+    word-wrap: break-word;
+    padding: 8px;
+    align-self: center;
 }
 
 .project-task-count {
@@ -360,6 +375,7 @@ main {
     color: rgba(255, 255, 255, 0.8);
     min-width: 60px;
     text-align: center;
+    align-self: center;
 }
 
 .assignee-select {
@@ -402,7 +418,7 @@ main {
 /* Альтернатива: кастомный выпадающий список с прокруткой */
 .custom-select-wrapper {
     position: relative;
-    width: 100%;
+    width: 95%;
     margin: 10px auto;
 }
 

@@ -1,6 +1,6 @@
 @font-face {
     font-family: "ProximaNova";
-    src: url("fonts/proximanova_bold.otf") format("opentype");
+    src: url("../fonts/proximanova_bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
@@ -198,11 +198,13 @@ main {
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
+    transition: all 0.2s ease;
 }
 
 .filter-checkbox:checked {
     background: #4caf50;
     border-color: #4caf50;
+    transition: all 0.25s ease;
 }
 
 .filter-checkbox:checked::after {
@@ -214,6 +216,12 @@ main {
     color: white;
 }
 
+/* Плавная реакция при фокусе */
+.filter-checkbox:focus-visible {
+    outline: 2px solid #4caf50;
+    outline-offset: 2px;
+}
+
 .modal {
     position: fixed;
     left: 0;
@@ -221,7 +229,7 @@ main {
     bottom: -100%;
     background: #2c2c2c;
     border-radius: 20px 20px 0 0;
-    padding: 20px;
+    /* padding: 20px; */
     transition: bottom 0.3s ease;
     max-height: 70%;
     overflow-y: auto;
@@ -239,6 +247,9 @@ main {
     align-items: center;
     margin-bottom: 10px;
     gap: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .modal-header h3 {

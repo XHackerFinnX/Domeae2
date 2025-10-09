@@ -55,7 +55,9 @@
                 <h3>Уведомления</h3>
                 <i class="fas fa-times" id="closeNotify"></i>
             </div>
-            <p>Нет новых уведомлений.</p>
+            <p style="padding-left: 20px; padding-right: 20px">
+                Нет новых уведомлений.
+            </p>
         </div>
 
         <!-- Модал меню проектов -->
@@ -66,7 +68,10 @@
             </div>
 
             <!-- Сюда будем добавлять проекты -->
-            <div id="modalProjectsList"></div>
+            <div
+                id="modalProjectsList"
+                style="padding-left: 10px; padding-right: 10px"
+            ></div>
         </div>
 
         <!-- Модал добавления раздела -->
@@ -135,6 +140,7 @@
                     align-items: center;
                     gap: 8px;
                     margin: 8px 0;
+                    margin-left: 10px;
                 "
             >
                 <label class="switch">
@@ -172,7 +178,9 @@
                 <h3>Удалить раздел</h3>
                 <i class="fas fa-times" id="closeDeleteModal"></i>
             </div>
-            <p>Вы уверены, что хотите удалить этот раздел?</p>
+            <p style="padding-left: 20px; padding-right: 20px">
+                Вы уверены, что хотите удалить этот раздел?
+            </p>
             <button class="add-section-btn" id="confirmDeleteBtn">
                 Подтвердить
             </button>
@@ -244,6 +252,7 @@
                     align-items: center;
                     gap: 8px;
                     margin: 8px 0;
+                    margin-left: 10px;
                 "
             >
                 <label class="switch">
@@ -255,8 +264,11 @@
 
             <!-- Блок комментариев -->
             <div id="commentsSection">
-                <h4>Комментарии</h4>
-                <div id="commentsList"></div>
+                <h4 style="margin-left: 10px">Комментарии</h4>
+                <div
+                    id="commentsList"
+                    style="margin-left: 10px; margin-right: 10px"
+                ></div>
                 <textarea
                     id="newCommentInput"
                     placeholder="Написать комментарий..."

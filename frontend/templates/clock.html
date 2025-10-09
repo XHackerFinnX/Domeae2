@@ -51,7 +51,7 @@
                         </label>
                         <div class="filter-controls">
                             <i
-                                class="fas fa-times"
+                                class="fas fa-chevron-up"
                                 id="closeFilters"
                                 style="cursor: pointer; font-size: 18px"
                             ></i>
@@ -70,18 +70,19 @@
                         <div class="dropdown-toggle">Выберите фильтры</div>
                         <div class="search-dropdown" aria-hidden="true">
                             <label class="search-item">
-                                <input type="checkbox" value="asc" /> Дата с
-                                начала
+                                <input type="checkbox" value="Дата с начала" />
+                                Дата с начала
                             </label>
                             <label class="search-item">
-                                <input type="checkbox" value="desc" /> Дата с
-                                конца
+                                <input type="checkbox" value="Дата с конца" />
+                                Дата с конца
                             </label>
                             <label class="search-item">
-                                <input type="checkbox" value="today" /> Сегодня
+                                <input type="checkbox" value="Сегодня" />
+                                Сегодня
                             </label>
                             <label class="search-item">
-                                <input type="checkbox" value="mine" /> Мои
+                                <input type="checkbox" value="Мои задачи" /> Мои
                                 задачи
                             </label>
                         </div>
@@ -109,7 +110,9 @@
                 <h3>Уведомления</h3>
                 <i class="fas fa-times" id="closeNotify"></i>
             </div>
-            <p>Нет новых уведомлений.</p>
+            <p style="padding-left: 20px; padding-right: 20px">
+                Нет новых уведомлений.
+            </p>
         </div>
 
         <script src="../static/js/clock.js" defer></script>

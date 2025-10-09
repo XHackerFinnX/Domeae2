@@ -218,8 +218,8 @@ function createCommentElement(text, dateTime, isNew = true) {
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
             <div style="display:flex; align-items:center; gap:8px;">
                 <span class="avatar-circle">👤</span>
-                <strong>Текущий пользователь</strong>
-                <small style="opacity:0.7;">${dateStr} ${timeStr}</small>
+                <strong style="opacity:0.7;">Текущий пользователь</strong>
+                <small style="opacity:0.7; margin-right: 10px;">${dateStr} ${timeStr}</small>
             </div>
             <i class="fas fa-trash delete-comment" style="cursor:pointer; opacity:0.7;"></i>
         </div>
@@ -949,12 +949,12 @@ folderBtn &&
 
 userBtn &&
     userBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/profile.html";
+        window.location.href = "/profile";
     });
 
 clockBtn &&
     clockBtn.addEventListener("click", () => {
-        window.location.href = "/frontend/templates/clock.html";
+        window.location.href = "/clock";
     });
 
 function switchProject(name) {
