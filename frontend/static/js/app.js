@@ -194,6 +194,88 @@ function openModal(modal) {
 //     }
 // }
 
+/* ===================== Утилиты для работы с API ===================== */
+function saveToBackend() {
+    const dataToSave = {
+        projects: projects,
+        currentProject: currentProject,
+    };
+
+    fetch("/api/save", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSave),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
+        .then((data) => {
+            console.log("Data saved successfully:", data);
+        })
+        .catch((error) => {
+            console.error("Error saving data:", error);
+        });
+}
+
+function loadFromBackend() {
+    fetch("/api/load")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Data loaded successfully:", data);
+            projects = data.projects || {};
+            currentProject = data.currentProject || null;
+            console.log(projects);
+            console.log(currentProject);
+            renderProjectsList();
+        })
+        .catch((error) => {
+            console.error("Error loading data:", error);
+            // Если нет данных на бекенде, используем пустые
+            projects = {};
+            currentProject = null;
+            renderProjectsList();
+        });
+}
+
+/* ===================== Функция сохранения раздела ===================== */
+function saveSectionToBackend(sectionName) {
+    if (!currentProject) {
+        console.error("No current project selected");
+        return;
+    }
+
+    // Обновляем локальные данные
+    if (!projects[currentProject]) {
+        projects[currentProject] = { sections: [] };
+    }
+
+    // Проверяем, существует ли уже такой раздел
+    const existingSection = projects[currentProject].sections.find(
+        (section) => section.name === sectionName
+    );
+
+    if (!existingSection) {
+        // Добавляем новый раздел
+        projects[currentProject].sections.push({
+            name: sectionName,
+            tasks: [],
+        });
+
+        // Сохраняем в бекенд
+        saveToBackend();
+    }
+}
+
 /* ===================== Модификация функций для работы с комментариями ===================== */
 function createCommentElement(text, dateTime, isNew = true) {
     const comment = document.createElement("div");
@@ -238,6 +320,8 @@ function createCommentElement(text, dateTime, isNew = true) {
                 activeTask._comments.splice(commentIndex, 1);
                 comment.remove();
                 // saveToLocalStorage();
+                saveToBackend();
+                console.log(1);
             }
         }
     });
@@ -280,6 +364,8 @@ addSectionBtn &&
         sectionNameInput.value = "";
         sectionModal.classList.remove("active");
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(2);
     });
 
 /* создание задачи */
@@ -325,6 +411,8 @@ createTaskBtn &&
 
         taskModal.classList.remove("active");
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(3);
     });
 
 /* контекстное меню */
@@ -369,6 +457,8 @@ renameSectionBtn &&
         renameModal.classList.remove("active");
         renameSectionInput.value = "";
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(4);
     });
 
 /* Удаление */
@@ -384,6 +474,8 @@ confirmDeleteBtn &&
         }
         deleteModal.classList.remove("active");
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(5);
     });
 
 // открыть окно добавления проекта
@@ -411,6 +503,8 @@ addProjectBtn &&
         // и оставить только вызов switchProject
         switchProject(name);
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(6);
     });
 
 /* ===================== добавление разделов / задач ===================== */
@@ -443,6 +537,9 @@ function addSection(name) {
         contextMenu.style.top = `${y}px`;
         contextMenu.style.left = `${x}px`;
     });
+
+    // СОХРАНЕНИЕ РАЗДЕЛА
+    saveSectionToBackend(name);
 }
 
 function addTask(
@@ -482,6 +579,7 @@ function addTask(
     });
 
     setupPressDrag(task);
+    saveToBackend();
 }
 
 /* ===================== press-to-drag ===================== */
@@ -705,6 +803,8 @@ function setupPressDrag(task) {
         isDragging = false;
         currentTarget = null;
         // saveToLocalStorage();
+        saveToBackend();
+        console.log(7);
     }
 
     task.addEventListener("mousedown", startPress);
@@ -1012,6 +1112,8 @@ function switchProject(name) {
 
     document.querySelector(".content").scrollTo(0, 0);
     // saveToLocalStorage();
+    // saveToBackend();
+    console.log(8);
 }
 
 /* ===================== редактирование задачи (открытие, сохранение, комментарии) ===================== */
@@ -1149,6 +1251,8 @@ function saveTaskChanges() {
     // снова навесим drag/press
     setupPressDrag(activeTask);
     // saveToLocalStorage();
+    saveToBackend();
+    console.log(9);
 }
 
 // подписываем поля на авто-сохранение (если они есть)
@@ -1195,6 +1299,8 @@ document.addEventListener("click", (e) => {
 
     if (newCommentInput) newCommentInput.value = "";
     // saveToLocalStorage();
+    saveToBackend();
+    console.log(10);
 });
 
 // Закрытие задачи (делегированный обработчик) — работает даже если кнопка появилась позже
@@ -1216,12 +1322,15 @@ document.addEventListener("click", (e) => {
     if (editTaskModal) editTaskModal.classList.remove("active");
     activeTask = null;
     // saveToLocalStorage();
+    saveToBackend();
+    console.log(11);
 });
 
 /* ===================== инициализация кастомных селектов ===================== */
 document.addEventListener("DOMContentLoaded", function () {
     // Загружаем данные из localStorage
     // loadFromLocalStorage();
+    loadFromBackend();
 
     // Если нет данных в localStorage, отображаем список проектов
     if (Object.keys(projects).length === 0) {

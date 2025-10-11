@@ -14,6 +14,9 @@ from router.error import router as router_error
 from router.profile import router as router_profile
 from router.project import router as router_project
 from router.clock import router as router_clock
+from router.auth import router as router_auth
+
+from bot.handler.commands import router as router_start
 
 from aiogram import Bot, Dispatcher
 from aiogram.types import Update
@@ -66,16 +69,19 @@ app.add_middleware(
 )
 
 app.mount(
-    "/static",
-    StaticFiles(directory=os.path.join(FRONTEND_DIR, "static")),
+    path="/static",
+    app=StaticFiles(directory=os.path.join(FRONTEND_DIR, "static")),
     name="static"
 )
 
 app.include_router(router_basic)
 app.include_router(router_error)
+app.include_router(router_clock)
+app.include_router(router_auth)
 app.include_router(router_profile)
 app.include_router(router_project)
-app.include_router(router_clock)
+
+dp.include_router(router_start)
 
 @app.post(config.WEBHOOK_PATH)
 async def webhooks(request: Request):

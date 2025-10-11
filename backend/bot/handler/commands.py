@@ -13,9 +13,9 @@ MOSCOW_TZ = ZoneInfo("Europe/Moscow")
 async def start_bot(message: Message):
 
     user_data = await telegram_name_users(message)
-    user_name = user_data['uname']
+    user_fname = user_data['fname']
     await message.answer(
-        text=f"Привет! {user_name} 👋\n" + START_TEXT,
+        text=f"Привет! {html.bold(user_fname)} 👋\n" + START_TEXT,
         reply_markup=markup_start
     )
     
