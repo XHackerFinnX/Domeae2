@@ -111,7 +111,7 @@
                 autocomplete="new-password"
             ></textarea>
 
-            <select id="taskAssigneeInput" class="assignee-select">
+            <!-- <select id="taskAssigneeInput" class="assignee-select">
                 <option value="">Кому назначить</option>
                 <option value="Иван Петров" data-avatar="👨‍💼">
                     Иван Петров
@@ -126,7 +126,32 @@
                     Екатерина Смирнова
                 </option>
             </select>
-            <select id="taskStatusInput" class="assignee-select">
+            <select id="taskStatusInput" class="status-select">
+                <option value="" disabled selected hidden>
+                    Когда выполнить
+                </option>
+                <option value="Сегодня">Сегодня</option>
+                <option value="Завтра">Завтра</option>
+                <option value="Неделя">В течении недели</option>
+            </select> -->
+
+            <select id="taskAssigneeInput">
+                <option value="">Кому назначить</option>
+                <option value="Иван Петров" data-avatar="👨‍💼">
+                    Иван Петров
+                </option>
+                <option value="Мария Сидорова" data-avatar="👩‍💻">
+                    Мария Сидорова
+                </option>
+                <option value="Алексей Иванов" data-avatar="👨‍🔧">
+                    Алексей Иванов
+                </option>
+                <option value="Екатерина Смирнова" data-avatar="👩‍🎨">
+                    Екатерина Смирнова
+                </option>
+            </select>
+
+            <select id="taskStatusInput">
                 <option value="" disabled selected hidden>
                     Когда выполнить
                 </option>
@@ -241,7 +266,7 @@
                 </option>
             </select>
 
-            <select id="editTaskStatus" class="assignee-select">
+            <select id="editTaskStatus" class="status-select">
                 <option value="Сегодня">Сегодня</option>
                 <option value="Завтра">Завтра</option>
                 <option value="Неделя">В течении недели</option>
@@ -288,6 +313,6 @@
         </div>
 
         <script src="../static/js/auth.js" defer></script>
-        <script src="../static/js/app.js" defer></script>
+        <script src="../static/js/app_copy.js" defer></script>
     </body>
 </html>
